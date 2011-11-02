@@ -15,7 +15,7 @@ body {
     background-color:silver;
     height:400px;
     position:relative;
-    max-width:300px;
+    max-width:300px;    
 }
 
 .band {
@@ -34,6 +34,11 @@ body {
     font-size:1.5em;
 }
 
+#unsolved .number {
+    position:static;
+    float:left;
+    margin:2px;
+}
 .number sub {
     font-size:0.6em;
 }

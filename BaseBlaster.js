@@ -52,7 +52,9 @@ $(function() {
 
             for (var i = powers.length - 1; i >= 0; i--) {
                 var div = parseInt(diff / powers[i]);
-
+                if (i > 0 && i<powers.length-1 && i % 3 === 2) {
+                    converted += ',';
+                }
                 converted += div;
 
                 diff -= div * powers[i];
@@ -89,6 +91,7 @@ $(function() {
             },
             baseBlaster.speed,
             function() {
+                nDOM.append(' = ' + n + '<sub>10</sub>').appendTo('#unsolved');
                 baseBlaster.addNumber();
             });
             this.activeQuestion = n;
