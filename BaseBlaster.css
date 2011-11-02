@@ -1,0 +1,85 @@
+body {
+    font-family:"minion-pro-1", "minion-pro-2", Palatino, Georgia, "Times New Roman", serif;
+    background-color:black;
+    color:silver;
+    text-align:center;
+    
+}
+#title {
+    font-size:2em;
+}
+#baseBlaster {
+    border: 1px solid #999;
+    width:70%;
+    margin:auto;
+    background-color:silver;
+    height:400px;
+    position:relative;
+    max-width:300px;
+}
+
+.band {
+    height:10%;
+    width:100%;
+    text-align:center;
+    font-size:2em;
+    font-weight:bold;
+}
+
+.number {
+    padding:15px;
+    border-radius:8px;
+    background-color:purple;
+    position:absolute;
+    font-size:1.5em;
+}
+
+.number sub {
+    font-size:0.6em;
+}
+#band1 {
+    background-color:red;
+}
+
+#band2 {
+    background-color:green;
+}
+#band3 {
+    background-color:orange;
+}
+
+#band4 {
+    background-color:blue;
+}
+#band5 {
+    background-color:yellow;
+}
+
+#band6 {
+    background-color:purple;
+}
+
+#band7 {
+    background-color:pink;
+}
+
+#band8 {
+    background-color:brown;
+}
+
+#band9 {
+    background-color:gold;
+}
+
+#band10 {
+    background-color: #9C6963;
+}
+
+#score {
+    margin-top:20px;
+    font-size:3em;
+}
+
+#input {
+    margin:20px;
+}
