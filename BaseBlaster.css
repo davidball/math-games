@@ -74,7 +74,6 @@ body {
 #band10 {
     background-color: #9C6963;
 }
-
 #score {
     margin-top:20px;
     font-size:3em;
@@ -82,4 +81,11 @@ body {
 
 #input {
     margin:20px;
+}
+
+#answer {
+height: 50px;
+font-size: 2em;
+width: 100px;
+text-align: center;
 }
