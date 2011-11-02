@@ -29,9 +29,10 @@ body {
 .number {
     padding:15px;
     border-radius:8px;
-    background-color:purple;
+    background-color:#00FFFF;
     position:absolute;
     font-size:1.5em;
+    color:black;
 }
 
 #unsolved .number {

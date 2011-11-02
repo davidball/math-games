@@ -1,28 +1,34 @@
 $(function() {
     var baseBlaster = {
         base: 2,
-        speed: 150000,
+        speed: 15000,
         maxNumber: 50,
         init: function() {
             $('#input').submit(function(ev) {
                 var userInput = ev.target[0].value;
                 if (userInput == baseBlaster.activeQuestion) {
                     $('body').css('background-color', 'green');
-                    baseBlaster.activeQuestionDOM.stop().hide('slow');
-                    baseBlaster.addNumber();
+                    ev.target[0].value=null;
                     baseBlaster.speed = baseBlaster.speed - 0.1 * baseBlaster.speed;
 
                     var score = parseInt($('#score').text());
 
-                    var top = parseInt($('.number:last').css('top'));
+                    var top = parseInt($('#baseBlaster .number:first').css('top'));
 
                     var height = $('#baseBlaster').height();
 
-                    var where = 100 * (1 - top / height);
-
+                    var where = 10 + 10* parseInt(10 * (1 - top / height));
+                    console.log('top');
+                    console.log(top);
+                    console.log(height);
+                    console.log(where);
+                    console.log('where');
                     score += where;
                     $('#score').text(score);
+                    var nDOM = baseBlaster.activeQuestionDOM;
                     
+                    nDOM.stop().hide('slow',function() {nDOM.remove();console.log('remove')});
+                    baseBlaster.addNumber();
                 }
                 else {
                     $('body').css('background-color', 'red');
@@ -82,14 +88,16 @@ $(function() {
 
             $('<sub/>').text(base).appendTo(nDOM);
 
-            var bbWidth = $('#baseBlaster').width();
+            var blasterDOM = $('#baseBlaster');
+            var bbWidth = blasterDOM.width();
             var nDOMWidth = nDOM.width();
             nDOM.css('left', (bbWidth - nDOMWidth) / 2 - 15);
 
             nDOM.animate({
-                top: 500
+                top: $('#baseBlaster').height() + 'px'
             },
             baseBlaster.speed,
+            'linear',
             function() {
                 nDOM.append(' = ' + n + '<sub>10</sub>').appendTo('#unsolved');
                 baseBlaster.addNumber();
