@@ -27,7 +27,7 @@ $(function() {
                     $('#score').text(score);
                     var nDOM = baseBlaster.activeQuestionDOM;
                     
-                    nDOM.stop().hide('slow',function() {nDOM.remove();console.log('remove')});
+                    nDOM.stop().remove();
                     baseBlaster.addNumber();
                 }
                 else {
@@ -93,7 +93,7 @@ $(function() {
             this.getSpeed() * 1000,
             'linear',
             function() {
-                nDOM.append(' = ' + n + '<sub>10</sub>').appendTo('#unsolved');
+                nDOM.append(' = ' + nDOM.attr('data-number') + '<sub>10</sub>').appendTo('#unsolved');
                 baseBlaster.addNumber();
             });
             
