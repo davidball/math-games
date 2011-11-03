@@ -1,14 +1,18 @@
 $(function() {
     var baseBlaster = {
         base: 2,
-        speed: 15000,
+        speed: 1500000,
         maxNumber: 50,
         init: function() {
+            $('#speed').change(function() {
+                baseBlaster.setupAnimation();
+            });
             $('#input').submit(function(ev) {
                 var userInput = ev.target[0].value;
                 if (userInput == baseBlaster.activeQuestion) {
-                    $('body').css('background-color', 'green');
+                    $('body').css('background-color', '#33FF99');
                     ev.target[0].value=null;
+                    baseBlaster.incrementSpeed(10);
                     baseBlaster.speed = baseBlaster.speed - 0.1 * baseBlaster.speed;
 
                     var score = parseInt($('#score').text());
@@ -18,11 +22,7 @@ $(function() {
                     var height = $('#baseBlaster').height();
 
                     var where = 10 + 10* parseInt(10 * (1 - top / height));
-                    console.log('top');
-                    console.log(top);
-                    console.log(height);
-                    console.log(where);
-                    console.log('where');
+             
                     score += where;
                     $('#score').text(score);
                     var nDOM = baseBlaster.activeQuestionDOM;
@@ -32,7 +32,7 @@ $(function() {
                 }
                 else {
                     $('body').css('background-color', 'red');
-                    baseBlaster.speed = baseBlaster.speed + 0.1 * baseBlaster.speed;
+                    baseBlaster.incrementSpeed(10);
                 }
                 return false;
             })
@@ -69,6 +69,35 @@ $(function() {
 
             return converted;
         },
+        incrementSpeed:function(percent) {
+            var curSpeed = this.getSpeed();
+            var newSpeed = Math.round(curSpeed + (percent/100) * curSpeed);            
+            this.setSpeed(newSpeed);  
+        },
+        getSpeed:function() {
+          return 60 - parseInt($('#speed').val());  
+        },
+        setSpeed:function(seconds) {
+            $('#speed').val(60-seconds);
+            this.speed = seconds * 1000;
+        },
+        setupAnimation:function() {
+            var nDOM = $('#baseBlaster .number:first');
+            
+            var blasterDOM = $('#baseBlaster');
+
+
+            nDOM.stop().animate({
+                top: blasterDOM.height() + 'px'
+            },
+            this.getSpeed() * 1000,
+            'linear',
+            function() {
+                nDOM.append(' = ' + n + '<sub>10</sub>').appendTo('#unsolved');
+                baseBlaster.addNumber();
+            });
+            
+        },
         addNumber: function() {
 
             baseBlaster.maxNumber = $('#maxValue').val() || 100;
@@ -83,7 +112,6 @@ $(function() {
             }
             var converted = this.decimalToTargetBase(n, base);
 
-
             var nDOM = $('<div class="number"/>').attr('data-number', n).css('top', 0).text(converted).appendTo('#baseBlaster');
 
             $('<sub/>').text(base).appendTo(nDOM);
@@ -93,15 +121,8 @@ $(function() {
             var nDOMWidth = nDOM.width();
             nDOM.css('left', (bbWidth - nDOMWidth) / 2 - 15);
 
-            nDOM.animate({
-                top: $('#baseBlaster').height() + 'px'
-            },
-            baseBlaster.speed,
-            'linear',
-            function() {
-                nDOM.append(' = ' + n + '<sub>10</sub>').appendTo('#unsolved');
-                baseBlaster.addNumber();
-            });
+            this.setupAnimation();
+            
             this.activeQuestion = n;
             this.activeQuestionDOM = nDOM;
         }
